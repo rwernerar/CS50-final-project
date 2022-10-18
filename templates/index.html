@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<!--MEJORAR APARIENCIA TELEFONO-->
+
+<form action="/gencopypassword" method="POST">
+  <!--div class="col-xs-12" style="height:20px;"></div-->
+    <div class="row mb-3 align-items-center justify-content-md-center">
+        <div class="col-auto">
+          <input type="text" name="password" id="password" class="form-control input-lg" value={{ password }}>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-primary" type="submit" name="submit" value="copy">Copy</button>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary" type="submit" name="submit" value="genpassword">Generate Password</button>
+        </div>
+    </div>
+
+
+  <div class="col-xs-12" style="height:30px;"></div>
+
+  <div style="font-size: 16px;"><fieldset class="generate-settings-fieldset"><legend>Settings</legend>
+
+
+
+  <div class="mx-auto p-2 m-2 border border-2 border-dark" style="width: 41%;">
+  <!--div class="container-sm p-2 border border-2 border-dark"-->
+      <div class="row">
+        <div class="col text-start">
+              <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="allow_numbers" id="allow_numbers" {{ settings.allow_numbers }}>
+                  <label class="form-check-label">Allow Numbers (0-9)</label>
+              </div>
+              <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="allow_upperc" id="allow_upperc" {{ settings.allow_upperc }}>
+                  <label class="form-check-label">Allow Uppercase (ABC)</label>
+              </div>
+              <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="exclude_similar" id="exclude_similar" {{ settings.exclude_similar }}>
+                  <label class="form-check-label">Exclude Similar (iI1loO0)</label>
+              </div>
+          </div>
+      <div class="col text-start">
+          <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" name="allow_symbols" id="allow_symbols" {{ settings.allow_symbols }}>
+              <label class="form-check-label">Allow Symbols (!@#$%^&amp;*.()+)</label>
+          </div>
+          <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" name="allow_lowerc" id="allow_lowerc" {{ settings.allow_lowerc }}>
+              <label class="form-check-label">Allow Lowercase (abc)</label>
+          </div>
+          <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" name="exclude_duplicate" id="exclude_duplicate" {{ settings.exclude_duplicate }}>
+              <label class="form-check-label">Exclude Duplicate Characters</label>
+          </div>
+      </div>
+      </div>
+  </div>
+  <p></p>
+
+
+    <div class="row g-3 align-items-center justify-content-md-center">
+      <div class="col-auto">
+        <label for="inputPassword6" class="col-form-label">Password Length</label>
+      </div>
+      <div class="col-auto">
+        <input type="number" min="8" max="20" name="password_lenght" id="password_length" class="form-control" value={{ password_length }}>
+      </div>
+      <div class="col-auto">
+        <span id="passwordHelpInline" class="form-text">
+          Must be 8-20 characters long.
+        </span>
+      </div>
+    </div>
+</form>
+<!--/form-->
+
+
+{% if copy == True %}
+<script>
+  var copyText = document.getElementById("password");
+    // Select the text field
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+   // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value);
+
+</script>
+{% endif %}
+
+
+
+{% endblock %}
